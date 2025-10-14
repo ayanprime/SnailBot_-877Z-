@@ -14,9 +14,11 @@ double prevRerror = 0;
 double prevLerror = 0;
 double pwrR;
 double pwrL;
-double kP = 0.8;
-double kI = 0.001;
-double kD = 0.2;
+double kP = 30;
+double kI = 0;
+double kD = 0;
+
+bool move1 = true;
 
 double RPIDpwr(double target) {
     Rerror = target - PodRight.position(turns) * wheelcirc;
@@ -31,7 +33,6 @@ double RPIDpwr(double target) {
     prevRerror = Rerror;
     pwrR = Rerror * kP + Rintegral * kI + derivative * kD;
     return pwrR;
-    wait(15, msec);
 }
 
 double LPIDpwr(double target) {
@@ -47,5 +48,26 @@ double LPIDpwr(double target) {
     prevLerror = Lerror;
     pwrL = Lerror * kP + Lintegral * kI + derivative * kD;
     return pwrL;
-    wait(15, msec);
+
+}
+
+void resetPods() {
+    
+    PodRight.setPosition(0, degrees);
+    PodLeft.setPosition(0, degrees);
+
+}
+
+void LRBauto() {
+
+    while(move1) {
+
+        Right.setVelocity(RPIDpwr(12), percent);
+        Left.setVelocity(LPIDpwr(12), percent);
+
+        Right.spin(forward);
+        Left.spin(forward);
+
+    }
+
 }
