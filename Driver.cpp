@@ -7,15 +7,27 @@
 
 int level = 1;
 
+bool curveToggle = true;
+
 void curvature() {
 
-    Left.setVelocity(((Controller1.Axis3.position() / 100.0 + fabs(Controller1.Axis3.position() / 100.0) * (Controller1.Axis1.position() / 100.0)) 
+    if (curveToggle) {
+
+        Left.setVelocity(((Controller1.Axis3.position() / 100.0 + fabs(Controller1.Axis3.position() / 100.0) * (Controller1.Axis1.position() / 100.0)) 
 / std::max(1.0, std::max(fabs(Controller1.Axis3.position() / 100.0 + fabs(Controller1.Axis3.position() / 100.0) * (Controller1.Axis1.position() / 100.0)), 
 fabs(Controller1.Axis3.position() / 100.0 - fabs(Controller1.Axis3.position() / 100.0) * (Controller1.Axis1.position() / 100.0))))) * 100.0, percent);
 
-    Right.setVelocity(((Controller1.Axis3.position() / 100.0 - fabs(Controller1.Axis3.position() / 100.0) * (Controller1.Axis1.position() / 100.0)) 
+        Right.setVelocity(((Controller1.Axis3.position() / 100.0 - fabs(Controller1.Axis3.position() / 100.0) * (Controller1.Axis1.position() / 100.0)) 
 / std::max(1.0, std::max(fabs(Controller1.Axis3.position() / 100.0 + fabs(Controller1.Axis3.position() / 100.0) * (Controller1.Axis1.position() / 100.0)), 
 fabs(Controller1.Axis3.position() / 100.0 - fabs(Controller1.Axis3.position() / 100.0) * (Controller1.Axis1.position() / 100.0))))) * 100.0, percent);
+    
+    } else {
+
+        Left.setVelocity(Controller1.Axis3.position() + Controller1.Axis1.position(), percent);
+        Right.setVelocity(Controller1.Axis3.position() - Controller1.Axis1.position(), percent);
+
+    }
+
 
 }
 
@@ -37,6 +49,12 @@ void tank() {
 
     Left.setVelocity(Controller1.Axis3.position(), percent);
     Right.setVelocity(Controller1.Axis2.position(), percent);
+
+}
+
+void CurveToggle() {
+
+    curveToggle = !curveToggle;
 
 }
 
@@ -103,21 +121,15 @@ void Level() {
 
     if(level == 1) {
 
-        intake.setVelocity(100, percent);
         intake.spin(reverse);
     
     } else if (level == 2) {
 
-        intake.setVelocity(100, percent);
         intake.spin(forward);
 
     } else if (level == 3) {
 
-
-
-    } else {
-
-        intake.stop();
+        intake.spin(forward);
 
     }
 }
@@ -126,14 +138,22 @@ void Level() {
 
 void Default() {
 
-    halo();
+    curvature();
     Left.spin(forward);
     Right.spin(forward);
-    if (Controller1.ButtonR1.pressing() == true) {
+    intake.setVelocity(100, percent);
+
+    if (Controller1.ButtonR1.pressing()) {
 
         Level();
 
-    } 
+    } else {
+
+        intake.stop();
+
+    }
+
+    Controller1.ButtonA.pressed(CurveToggle);
     //Levels 
     Controller1.ButtonDown.pressed(levelDOWN);
     Controller1.ButtonUp.pressed(levelUP);
@@ -195,6 +215,8 @@ void Bennet() {
     Controller1.ButtonR2.pressed(descorecatch);
     Controller1.ButtonL1.pressed(hopper);
 }
+
+
 
 void Brian() {
 
