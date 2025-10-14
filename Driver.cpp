@@ -236,6 +236,22 @@ void Connor() {
     curvature();
     Left.spin(forward);
     Right.spin(forward);
+    intake.setVelocity(100, percent);
+
+    if (Controller1.ButtonR1.pressing()) {
+
+        Level();
+
+    } else {
+
+        intake.stop();
+
+    }
+
+    Controller1.ButtonR2.pressed(CurveToggle);
+    //Levels 
+    Controller1.ButtonDown.pressed(levelDOWN);
+    Controller1.ButtonUp.pressed(levelUP);
     //Levels 
     Controller1.ButtonDown.pressed(levelDOWN);
     Controller1.ButtonUp.pressed(levelUP);
