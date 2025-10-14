@@ -126,7 +126,7 @@ void Level() {
 
 void Default() {
 
-    curvature();
+    halo();
     Left.spin(forward);
     Right.spin(forward);
     if (Controller1.ButtonR1.pressing() == true) {
@@ -142,13 +142,10 @@ void Default() {
     Controller1.ButtonL1.pressed(hopper);
     
 }
-
-/* 
 void Alivia() {
 
-    Left.setVelocity(Controller1.Axis3.position() + Controller1.Axis1.position(), percent);
+    arcade();
     Left.spin(forward);
-    Right.setVelocity(Controller1.Axis3.position() - Controller1.Axis1.position(), percent);
     Right.spin(forward);
     //Levels 
     Controller1.ButtonDown.pressed(levelDOWN);
@@ -156,27 +153,40 @@ void Alivia() {
     Controller1.ButtonR1.pressed(descoreSetting);
     Controller1.ButtonR2.pressed(descorecatch);
     Controller1.ButtonL1.pressed(hopper);
-}
 
-void Ayan() {
-
-    Left.setVelocity(Controller1.Axis3.position() + Controller1.Axis1.position(), percent);
-    Left.spin(forward);
-    Right.setVelocity(Controller1.Axis3.position() - Controller1.Axis1.position(), percent);
-    Right.spin(forward);
-    //Levels 
-    Controller1.ButtonDown.pressed(levelDOWN);
-    Controller1.ButtonUp.pressed(levelUP);
-    Controller1.ButtonR1.pressed(descoreSetting);
-    Controller1.ButtonR2.pressed(descorecatch);
-    Controller1.ButtonL1.pressed(hopper);
 }
 
 void Andrew() {
 
-    Left.setVelocity(Controller1.Axis3.position() + Controller1.Axis1.position(), percent);
+    halo();
     Left.spin(forward);
-    Right.setVelocity(Controller1.Axis3.position() - Controller1.Axis1.position(), percent);
+    Right.spin(forward);
+    //Levels 
+    Controller1.ButtonDown.pressed(levelDOWN);
+    Controller1.ButtonUp.pressed(levelUP);
+    Controller1.ButtonR1.pressed(descoreSetting);
+    Controller1.ButtonR2.pressed(descorecatch);
+    Controller1.ButtonL1.pressed(hopper);
+
+}
+
+void Ayan() {
+
+    curvature();
+    Left.spin(forward);
+    Right.spin(forward);
+    //Levels 
+    Controller1.ButtonDown.pressed(levelDOWN);
+    Controller1.ButtonUp.pressed(levelUP);
+    Controller1.ButtonR1.pressed(descoreSetting);
+    Controller1.ButtonR2.pressed(descorecatch);
+    Controller1.ButtonL1.pressed(hopper);
+
+}
+
+void Bennet() {
+
+    Left.spin(forward);
     Right.spin(forward);
     //Levels 
     Controller1.ButtonDown.pressed(levelDOWN);
@@ -188,9 +198,8 @@ void Andrew() {
 
 void Brian() {
 
-    Left.setVelocity(Controller1.Axis3.position() + Controller1.Axis1.position(), percent);
+    halo();
     Left.spin(forward);
-    Right.setVelocity(Controller1.Axis3.position() - Controller1.Axis1.position(), percent);
     Right.spin(forward);
     //Levels 
     Controller1.ButtonDown.pressed(levelDOWN);
@@ -199,28 +208,11 @@ void Brian() {
     Controller1.ButtonR2.pressed(descorecatch);
     Controller1.ButtonL1.pressed(hopper);
 }
-
-
-void Bennet() {
-
-    Left.setVelocity(Controller1.Axis3.position() + Controller1.Axis1.position(), percent);
-    Left.spin(forward);
-    Right.setVelocity(Controller1.Axis3.position() - Controller1.Axis1.position(), percent);
-    Right.spin(forward);
-    //Levels 
-    Controller1.ButtonDown.pressed(levelDOWN);
-    Controller1.ButtonUp.pressed(levelUP);
-    Controller1.ButtonR1.pressed(descoreSetting);
-    Controller1.ButtonR2.pressed(descorecatch);
-    Controller1.ButtonL1.pressed(hopper);
-}
-
 
 void Connor() {
 
-    Left.setVelocity(Controller1.Axis3.position() + Controller1.Axis1.position(), percent);
+    curvature();
     Left.spin(forward);
-    Right.setVelocity(Controller1.Axis3.position() - Controller1.Axis1.position(), percent);
     Right.spin(forward);
     //Levels 
     Controller1.ButtonDown.pressed(levelDOWN);
@@ -232,9 +224,8 @@ void Connor() {
 
 void Grace() {
 
-    Left.setVelocity(Controller1.Axis3.position() + Controller1.Axis1.position(), percent);
+    curvature();
     Left.spin(forward);
-    Right.setVelocity(Controller1.Axis3.position() - Controller1.Axis1.position(), percent);
     Right.spin(forward);
     //Levels 
     Controller1.ButtonDown.pressed(levelDOWN);
@@ -246,9 +237,7 @@ void Grace() {
 
 void Maria() {
 
-    Left.setVelocity(Controller1.Axis3.position() + Controller1.Axis1.position(), percent);
     Left.spin(forward);
-    Right.setVelocity(Controller1.Axis3.position() - Controller1.Axis1.position(), percent);
     Right.spin(forward);
     //Levels 
     Controller1.ButtonDown.pressed(levelDOWN);
@@ -257,5 +246,3 @@ void Maria() {
     Controller1.ButtonR2.pressed(descorecatch);
     Controller1.ButtonL1.pressed(hopper);
 }
-*/
-
