@@ -11,6 +11,12 @@ extern motor lmf;
 extern motor lmb;
 extern motor_group Left;
 
+extern motor intake;
+
 extern digital_out descore;
+extern digital_out rPiston;
+extern digital_out lPiston;
+extern digital_out trap;
+
 extern rotation PodLeft;
 extern rotation PodRight;
