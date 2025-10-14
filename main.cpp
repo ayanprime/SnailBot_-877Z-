@@ -15,53 +15,52 @@ using namespace vex;
 competition Competition;
 
 //auton select variable
-bool descoreMode = false;
+bool SELECTING = true;
 
 
 
 //descore mech callback function
-void descoreCallback() {
-  descoreMode = !descoreMode;
-  if(descoreMode) {
-    descore.set(true);
-  } else {
-    descore.set(false);
-  }
-}
-
 void pre_auton(void) {
 
-  while(true) {
+  while(SELECTING == true) {
     screenControl();
-  }
 
+    if(selected == true) {
+
+      SELECTING = false;
+
+    }
+  }
 }
 
 
 
 void autonomous(void) {
-  // ..........................................................................
-  // Insert autonomous user code here.
-  // ..........................................................................
+  autonDisplay();
+  resetPods();
+  if(autonSelected == 1) {
+
+    LRBauto();
+
+  }
 }
 
 
 
 void usercontrol(void) {
-  // User control code here, inside the loop
-  Controller1.Screen.clearScreen();
+
   while (1) {
-    
-    //joystick control (robot movement)
-    Left.setVelocity(Controller1.Axis3.position() + Controller1.Axis1.position(), percent);
-    Right.setVelocity(Controller1.Axis3.position() - Controller1.Axis1.position(), percent);
-    Left.spin(forward);
-    Right.spin(forward);
+    if (SELECTING == false){
 
-    
+      driveDisplay();
 
-    //button controls
-    Controller1.ButtonB.pressed(descoreCallback);
+    }
+
+    if(driver == 0){
+
+      Default();
+
+    }
 
     wait(20, msec); // Sleep the task for a short amount of time to
                     // prevent wasted resources.
