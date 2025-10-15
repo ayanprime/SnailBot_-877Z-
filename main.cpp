@@ -60,6 +60,38 @@ void usercontrol(void) {
 
       Default();
 
+    } else if (driver == 1){
+
+      Alivia();
+
+    } else if (driver == 2){
+
+      Andrew();
+
+    } else if (driver == 3){
+
+      Ayan();
+
+    } else if (driver == 4){
+
+      Bennet();
+
+    } else if (driver == 5){
+
+      Brian();
+
+    } else if (driver == 6){
+
+      Connor();
+
+    } else if (driver == 7){
+
+      Grace();
+
+    } else if (driver == 8){
+
+      Maria();
+
     }
 
     wait(20, msec); // Sleep the task for a short amount of time to
