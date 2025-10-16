@@ -15,12 +15,13 @@ motor_group Left = motor_group(lmf, lmb);
 
 motor intake = motor(PORT5, ratio18_1, false);
 
+motor fingerer = motor(PORT8, ratio18_1, false);
+
 //pods
 rotation PodLeft = rotation(PORT6, true);
 rotation PodRight = rotation(PORT7, false);
 
 //pistons
-digital_out descore = digital_out(Brain.ThreeWirePort.A);
 digital_out rPiston = digital_out(Brain.ThreeWirePort.B);
 digital_out lPiston = digital_out(Brain.ThreeWirePort.C);
 digital_out trap = digital_out(Brain.ThreeWirePort.D);
