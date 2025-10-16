@@ -2,7 +2,7 @@
 #ifndef PI
 #define PI 3.14159265358979323846
 #endif
-double wheelrad = 1.375; //inches
+double wheelrad = 1.25; //inches
 double wheelcirc = 2 * PI * wheelrad; //inches
 
 double Rerror;
@@ -14,9 +14,9 @@ double prevRerror = 0;
 double prevLerror = 0;
 double pwrR;
 double pwrL;
-double kP = 30;
+double kP = 25;
 double kI = 0;
-double kD = 0;
+double kD = 1;
 
 bool move1 = true;
 
@@ -36,7 +36,7 @@ double RPIDpwr(double target) {
 }
 
 double LPIDpwr(double target) {
-    Lerror = target - PodLeft.position(turns) * wheelcirc;
+    Lerror = target - PodRight.position(turns) * wheelcirc;
     Lintegral += Lerror;
     if(Lerror == 0 || Lerror < 0) {
         Lintegral = 0;
@@ -62,8 +62,8 @@ void LRBauto() {
 
     while(move1) {
 
-        Right.setVelocity(RPIDpwr(12), percent);
-        Left.setVelocity(LPIDpwr(12), percent);
+        Right.setVelocity(RPIDpwr(6), percent);
+        Left.setVelocity(LPIDpwr(6), percent);
 
         Right.spin(forward);
         Left.spin(forward);
