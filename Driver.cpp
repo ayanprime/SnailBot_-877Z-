@@ -9,6 +9,10 @@ int level = 1;
 
 bool curveToggle = true;
 
+bool finger = false;
+
+
+
 void curvature() {
 
     if (curveToggle) {
@@ -83,16 +87,25 @@ void descorecatch() {
 
 }
 
-void descoreSetting() {
+void descore() {
 
-    if (descore.value() == true) {
-        
-        descore.set(false);
-    
-    } else if (descore.value() == false) {
-        
-        descore.set(true);
-    
+    finger = true;
+
+}
+
+void Finger() {
+
+    if (finger == true) {
+
+        fingerer.spinToPosition(360, degrees, false);
+        if (fingerer.position(degrees) == 360) {
+
+            fingerer.setStopping(coast);
+            fingerer.setPosition(0, degrees);
+            finger = false;
+
+        }
+
     }
 
 }
@@ -142,16 +155,30 @@ void Default() {
     Left.spin(forward);
     Right.spin(forward);
     intake.setVelocity(100, percent);
+    fingerer.setVelocity(100, percent);
 
     if (Controller1.ButtonR1.pressing()) {
 
         Level();
+        fingerer.spin(forward);
 
     } else {
 
         intake.stop();
 
     }
+
+    if (Controller1.ButtonR2.pressing()) {
+
+        fingerer.spin(forward);
+
+    } else {
+
+        fingerer.stop();
+
+    }
+
+    Controller1.ButtonL1.pressed(descore);
 
     Controller1.ButtonA.pressed(CurveToggle);
     //Levels 
@@ -160,6 +187,8 @@ void Default() {
     
     Controller1.ButtonR2.pressed(descorecatch);
     Controller1.ButtonL1.pressed(hopper);
+
+    Finger();
     
 }
 void Alivia() {
@@ -170,7 +199,7 @@ void Alivia() {
     //Levels 
     Controller1.ButtonDown.pressed(levelDOWN);
     Controller1.ButtonUp.pressed(levelUP);
-    Controller1.ButtonR1.pressed(descoreSetting);
+    Controller1.ButtonR1.pressed(descore);
     Controller1.ButtonR2.pressed(descorecatch);
     Controller1.ButtonL1.pressed(hopper);
 
@@ -184,7 +213,7 @@ void Andrew() {
     //Levels 
     Controller1.ButtonDown.pressed(levelDOWN);
     Controller1.ButtonUp.pressed(levelUP);
-    Controller1.ButtonR1.pressed(descoreSetting);
+    Controller1.ButtonR1.pressed(descore);
     Controller1.ButtonR2.pressed(descorecatch);
     Controller1.ButtonL1.pressed(hopper);
 
@@ -198,7 +227,7 @@ void Ayan() {
     //Levels 
     Controller1.ButtonDown.pressed(levelDOWN);
     Controller1.ButtonUp.pressed(levelUP);
-    Controller1.ButtonR1.pressed(descoreSetting);
+    Controller1.ButtonR1.pressed(descore);
     Controller1.ButtonR2.pressed(descorecatch);
     Controller1.ButtonL1.pressed(hopper);
 
@@ -211,7 +240,7 @@ void Bennet() {
     //Levels 
     Controller1.ButtonDown.pressed(levelDOWN);
     Controller1.ButtonUp.pressed(levelUP);
-    Controller1.ButtonR1.pressed(descoreSetting);
+    Controller1.ButtonR1.pressed(descore);
     Controller1.ButtonR2.pressed(descorecatch);
     Controller1.ButtonL1.pressed(hopper);
 }
@@ -226,7 +255,7 @@ void Brian() {
     //Levels 
     Controller1.ButtonDown.pressed(levelDOWN);
     Controller1.ButtonUp.pressed(levelUP);
-    Controller1.ButtonR1.pressed(descoreSetting);
+    Controller1.ButtonR1.pressed(descore);
     Controller1.ButtonR2.pressed(descorecatch);
     Controller1.ButtonL1.pressed(hopper);
 }
@@ -255,7 +284,7 @@ void Connor() {
     //Levels 
     Controller1.ButtonDown.pressed(levelDOWN);
     Controller1.ButtonUp.pressed(levelUP);
-    Controller1.ButtonR1.pressed(descoreSetting);
+    Controller1.ButtonR1.pressed(descore);
     Controller1.ButtonR2.pressed(descorecatch);
     Controller1.ButtonL1.pressed(hopper);
 }
@@ -268,7 +297,7 @@ void Grace() {
     //Levels 
     Controller1.ButtonDown.pressed(levelDOWN);
     Controller1.ButtonUp.pressed(levelUP);
-    Controller1.ButtonR1.pressed(descoreSetting);
+    Controller1.ButtonR1.pressed(descore);
     Controller1.ButtonR2.pressed(descorecatch);
     Controller1.ButtonL1.pressed(hopper);
 }
@@ -280,7 +309,7 @@ void Maria() {
     //Levels 
     Controller1.ButtonDown.pressed(levelDOWN);
     Controller1.ButtonUp.pressed(levelUP);
-    Controller1.ButtonR1.pressed(descoreSetting);
+    Controller1.ButtonR1.pressed(descore);
     Controller1.ButtonR2.pressed(descorecatch);
     Controller1.ButtonL1.pressed(hopper);
 }
