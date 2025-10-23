@@ -62,30 +62,6 @@ void CurveToggle() {
 
 }
 
-void hopper() {
-
-    if(rPiston.value() == true && lPiston.value() == true) {
-
-        rPiston.set(false); 
-        lPiston.set(false);
-    } else if(rPiston.value() == true && lPiston.value() == true) {
-        rPiston.set(true); 
-        lPiston.set(true);
-    }
-
-}
-
-void descorecatch() {
-
-    if (trap.value() == true) {
-
-        trap.set(false);
-    } else if (trap.value() == false) {
-        trap.set(true);
-    }
-
-
-}
 
 void descore() {
 
@@ -184,9 +160,6 @@ void Default() {
     //Levels 
     Controller1.ButtonDown.pressed(levelDOWN);
     Controller1.ButtonUp.pressed(levelUP);
-    
-    Controller1.ButtonR2.pressed(descorecatch);
-    Controller1.ButtonL1.pressed(hopper);
 
     Finger();
     
@@ -200,8 +173,6 @@ void Alivia() {
     Controller1.ButtonDown.pressed(levelDOWN);
     Controller1.ButtonUp.pressed(levelUP);
     Controller1.ButtonR1.pressed(descore);
-    Controller1.ButtonR2.pressed(descorecatch);
-    Controller1.ButtonL1.pressed(hopper);
 
 }
 
@@ -214,8 +185,6 @@ void Andrew() {
     Controller1.ButtonDown.pressed(levelDOWN);
     Controller1.ButtonUp.pressed(levelUP);
     Controller1.ButtonR1.pressed(descore);
-    Controller1.ButtonR2.pressed(descorecatch);
-    Controller1.ButtonL1.pressed(hopper);
 
 }
 
@@ -228,21 +197,18 @@ void Ayan() {
     Controller1.ButtonDown.pressed(levelDOWN);
     Controller1.ButtonUp.pressed(levelUP);
     Controller1.ButtonR1.pressed(descore);
-    Controller1.ButtonR2.pressed(descorecatch);
-    Controller1.ButtonL1.pressed(hopper);
 
 }
 
 void Bennet() {
 
+    arcade();
     Left.spin(forward);
     Right.spin(forward);
     //Levels 
     Controller1.ButtonDown.pressed(levelDOWN);
     Controller1.ButtonUp.pressed(levelUP);
     Controller1.ButtonR1.pressed(descore);
-    Controller1.ButtonR2.pressed(descorecatch);
-    Controller1.ButtonL1.pressed(hopper);
 }
 
 
@@ -256,8 +222,6 @@ void Brian() {
     Controller1.ButtonDown.pressed(levelDOWN);
     Controller1.ButtonUp.pressed(levelUP);
     Controller1.ButtonR1.pressed(descore);
-    Controller1.ButtonR2.pressed(descorecatch);
-    Controller1.ButtonL1.pressed(hopper);
 }
 
 void Connor() {
@@ -285,8 +249,6 @@ void Connor() {
     Controller1.ButtonDown.pressed(levelDOWN);
     Controller1.ButtonUp.pressed(levelUP);
     Controller1.ButtonR1.pressed(descore);
-    Controller1.ButtonR2.pressed(descorecatch);
-    Controller1.ButtonL1.pressed(hopper);
 }
 
 void Grace() {
@@ -298,18 +260,15 @@ void Grace() {
     Controller1.ButtonDown.pressed(levelDOWN);
     Controller1.ButtonUp.pressed(levelUP);
     Controller1.ButtonR1.pressed(descore);
-    Controller1.ButtonR2.pressed(descorecatch);
-    Controller1.ButtonL1.pressed(hopper);
 }
 
 void Maria() {
 
+    halo();
     Left.spin(forward);
     Right.spin(forward);
     //Levels 
     Controller1.ButtonDown.pressed(levelDOWN);
     Controller1.ButtonUp.pressed(levelUP);
     Controller1.ButtonR1.pressed(descore);
-    Controller1.ButtonR2.pressed(descorecatch);
-    Controller1.ButtonL1.pressed(hopper);
 }
