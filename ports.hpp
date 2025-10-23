@@ -13,10 +13,11 @@ extern motor_group Left;
 
 extern motor intake;
 
-extern digital_out descore;
-extern digital_out rPiston;
-extern digital_out lPiston;
-extern digital_out trap;
+extern motor converter;
+
+extern motor conveyor;
+
+extern motor fingerer;
 
 extern rotation PodLeft;
 extern rotation PodRight;
