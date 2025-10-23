@@ -14,9 +14,9 @@ double prevRerror = 0;
 double prevLerror = 0;
 double pwrR;
 double pwrL;
-double kP = 25;
-double kI = 0;
-double kD = 1;
+double kP = 18;
+double kI = 0.000004;
+double kD = 0.07;
 
 bool move1 = true;
 
@@ -62,8 +62,8 @@ void LRBauto() {
 
     while(move1) {
 
-        Right.setVelocity(RPIDpwr(6), percent);
-        Left.setVelocity(LPIDpwr(6), percent);
+        Right.setVelocity(RPIDpwr(24), percent);
+        Left.setVelocity(LPIDpwr(24), percent);
 
         Right.spin(forward);
         Left.spin(forward);
