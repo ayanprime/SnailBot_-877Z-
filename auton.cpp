@@ -19,9 +19,9 @@ double kI = 0.000004;
 double kD = 0.07;
 
 bool move1 = true;
-bool move2 = false;
-bool move3 = false;
-bool move4 = false;
+bool move2 = true;
+bool move3 = true;
+bool move4 = true;
 
 double RPIDpwr(double target) {
     Rerror = target - PodRight.position(turns) * wheelcirc;
@@ -65,18 +65,34 @@ void LRBauto() {
 
     while(move1) {
 
-        Right.setVelocity(RPIDpwr(5.2), percent);
-        Left.setVelocity(LPIDpwr(5.2), percent);
+        Right.setVelocity(RPIDpwr(3.55), percent);
+        Left.setVelocity(LPIDpwr(3.55), percent);
 
         Right.spin(forward);
         Left.spin(forward);
 
+        if(Right.velocity(percent) == 0 && Left.velocity(percent) == 0 && PodRight.position(degrees) != 0 && PodLeft.position(degrees) != 0) {
+
+            wait(15, msec);
+
+
+            move1 = false;
+
+        }
+
     }
 
-    while(move2) {
+    while(move2){
 
-        Right.setVelocity(RPIDpwr(31.65), percent);
-        Left.setVelocity(LPIDpwr(31.65), percent);
+        Left.spinToPosition(1.5, turns, false);
+        Right.spinToPosition(-1.5, turns, true);
+
+    }
+
+    while(move3) {
+
+        Right.setVelocity(RPIDpwr(0), percent);
+        Left.setVelocity(LPIDpwr(0), percent);
 
         Right.spin(forward);
         Left.spin(forward);
