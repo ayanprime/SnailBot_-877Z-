@@ -13,15 +13,16 @@ motor lmf = motor(PORT12, ratio18_1, true);
 motor lmb = motor(PORT11, ratio18_1, true);
 motor_group Left = motor_group(lmf, lmb);
 
-motor intake = motor(PORT5, ratio18_1, false);
+motor intake = motor(PORT8, ratio18_1, false);
 
-motor converter = motor(PORT9, ratio18_1, false);
+motor converter = motor(PORT7, ratio18_1, false);
 
-motor conveyor = motor(PORT10, ratio18_1, false);
+motor conveyor = motor(PORT9, ratio18_1, true);
 
-motor fingerer = motor(PORT8, ratio18_1, false);
+motor fingerer = motor(PORT1, ratio18_1, false);
+
+motor top = motor(PORT17, ratio18_1, false);
 
 //pods
 rotation PodLeft = rotation(PORT13, true);
 rotation PodRight = rotation(PORT18, false);
-
