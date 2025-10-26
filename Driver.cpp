@@ -5,13 +5,11 @@
 // change block flow from scoring to going into our storage
 // 
 
-int level = 1;
+int level = 2;
 
 bool curveToggle = true;
 
 bool finger = false;
-
-
 
 void curvature() {
 
@@ -25,10 +23,12 @@ fabs(Controller1.Axis3.position() / 100.0 - fabs(Controller1.Axis3.position() / 
 / std::max(1.0, std::max(fabs(Controller1.Axis3.position() / 100.0 + fabs(Controller1.Axis3.position() / 100.0) * (Controller1.Axis1.position() / 100.0)), 
 fabs(Controller1.Axis3.position() / 100.0 - fabs(Controller1.Axis3.position() / 100.0) * (Controller1.Axis1.position() / 100.0))))) * 100.0, percent);
     
-    } else {
+        if(Controller1.Axis3.position() == 0) {
 
-        Left.setVelocity(Controller1.Axis3.position() + Controller1.Axis1.position(), percent);
-        Right.setVelocity(Controller1.Axis3.position() - Controller1.Axis1.position(), percent);
+            Right.setVelocity(-Controller1.Axis1.position(), percent);
+            Left.setVelocity(Controller1.Axis1.position(), percent);
+
+        }
 
     }
 
@@ -56,33 +56,9 @@ void tank() {
 
 }
 
-void CurveToggle() {
-
-    curveToggle = !curveToggle;
-
-}
-
-
 void descore() {
 
     finger = true;
-
-}
-
-void Finger() {
-
-    if (finger == true) {
-
-        fingerer.spinToPosition(360, degrees, false);
-        if (fingerer.position(degrees) == 360) {
-
-            fingerer.setStopping(coast);
-            fingerer.setPosition(0, degrees);
-            finger = false;
-
-        }
-
-    }
 
 }
 
@@ -91,6 +67,7 @@ void levelUP() {
     if (level < 3) {
     
         level++;
+        wait(300, msec);
     
     }
 
@@ -101,6 +78,7 @@ void levelDOWN() {
     if (level > 1) {
     
         level--;
+        wait(1, sec);
     
     }
 
@@ -111,19 +89,27 @@ void Level() {
     if(level == 1) {
 
         intake.spin(reverse);
+        converter.spin(reverse);
+        conveyor.spin(reverse);
+        top.spin(reverse);
     
     } else if (level == 2) {
 
         intake.spin(forward);
+        converter.spin(forward);
+        conveyor.spin(forward);
+        top.spin(reverse);
+
 
     } else if (level == 3) {
 
         intake.spin(forward);
+        converter.spin(forward);
+        conveyor.spin(forward);
+        top.spin(forward);
 
     }
 }
-
-
 
 void Default() {
 
@@ -156,14 +142,12 @@ void Default() {
 
     Controller1.ButtonL1.pressed(descore);
 
-    Controller1.ButtonA.pressed(CurveToggle);
     //Levels 
     Controller1.ButtonDown.pressed(levelDOWN);
     Controller1.ButtonUp.pressed(levelUP);
-
-    Finger();
     
 }
+
 void Alivia() {
 
     arcade();
@@ -202,20 +186,51 @@ void Ayan() {
 
 void Bennet() {
 
-    arcade();
+    halo();
     Left.spin(forward);
     Right.spin(forward);
+
+    fingerer.setVelocity(100, percent);
+    intake.setVelocity(100, percent);
+    conveyor.setVelocity(70, percent);
+    converter.setVelocity(100, percent);
+    top.setVelocity(100, percent);
+
+    if (Controller1.ButtonL2.pressing()) {
+
+        level = 1;
+        Level();
+
+    } else if(Controller1.ButtonL1.pressing()){
+        
+        level = 2;
+        Level();
+
+    } else {
+
+        intake.stop();
+        converter.stop();
+        conveyor.stop();
+        top.stop();
+
+    }
+
+    if (finger == true) {
+
+        fingerer.spinFor(24, turns, false);
+        finger = false;
+
+    }
+
     //Levels 
     Controller1.ButtonDown.pressed(levelDOWN);
     Controller1.ButtonUp.pressed(levelUP);
-    Controller1.ButtonR1.pressed(descore);
+    Controller1.ButtonY.pressed(descore);
 }
-
-
 
 void Brian() {
 
-    halo();
+    arcade();
     Left.spin(forward);
     Right.spin(forward);
     //Levels 
@@ -229,7 +244,11 @@ void Connor() {
     curvature();
     Left.spin(forward);
     Right.spin(forward);
+    fingerer.setVelocity(100, percent);
     intake.setVelocity(100, percent);
+    conveyor.setVelocity(70, percent);
+    converter.setVelocity(100, percent);
+    top.setVelocity(100, percent);
 
     if (Controller1.ButtonR1.pressing()) {
 
@@ -238,17 +257,25 @@ void Connor() {
     } else {
 
         intake.stop();
+        converter.stop();
+        conveyor.stop();
+        top.stop();
 
     }
 
-    Controller1.ButtonR2.pressed(CurveToggle);
+    if (finger == true) {
+
+        fingerer.spinFor(24, turns, false);
+        finger = false;
+
+    }
+
+    Controller1.ButtonA.pressed(descore);
+
     //Levels 
     Controller1.ButtonDown.pressed(levelDOWN);
     Controller1.ButtonUp.pressed(levelUP);
-    //Levels 
-    Controller1.ButtonDown.pressed(levelDOWN);
-    Controller1.ButtonUp.pressed(levelUP);
-    Controller1.ButtonR1.pressed(descore);
+    
 }
 
 void Grace() {
@@ -264,11 +291,26 @@ void Grace() {
 
 void Maria() {
 
-    halo();
+    intake.setVelocity(100, percent);
+    converter.setVelocity(100, percent);
+    conveyor.setVelocity(100, percent);
+
+    tank();
     Left.spin(forward);
     Right.spin(forward);
     //Levels 
-    Controller1.ButtonDown.pressed(levelDOWN);
-    Controller1.ButtonUp.pressed(levelUP);
-    Controller1.ButtonR1.pressed(descore);
+    Controller1.ButtonL2.pressed(levelDOWN);
+    Controller1.ButtonL1.pressed(levelUP);
+    if(Controller1.ButtonR1.pressing()){
+
+        Level();
+
+    } else {
+
+        intake.stop();
+        converter.stop();
+        conveyor.stop();
+
+    }
+
 }
