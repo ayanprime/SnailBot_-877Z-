@@ -43,6 +43,11 @@ void autonomous(void) {
     LRBauto();
 
   }
+  if(autonSelected == 2) {
+
+      RRBauto();
+
+  }
 }
 
 
@@ -60,35 +65,51 @@ void usercontrol(void) {
 
       Default();
 
-    } else if (driver == 1){
+    } 
+    
+    if (driver == 1){
 
       Alivia();
 
-    } else if (driver == 2){
+    } 
+    
+    if (driver == 2){
 
       Andrew();
 
-    } else if (driver == 3){
+    } 
+    
+    if (driver == 3){
 
       Ayan();
 
-    } else if (driver == 4){
+    }
+    
+    if (driver == 4){
 
       Bennet();
 
-    } else if (driver == 5){
+    } 
+    
+    if (driver == 5){
 
       Brian();
 
-    } else if (driver == 6){
+    } 
+    
+    if (driver == 6){
 
       Connor();
 
-    } else if (driver == 7){
+    } 
+    
+    if (driver == 7){
 
       Grace();
 
-    } else if (driver == 8){
+    } 
+    
+    if (driver == 8){
 
       Maria();
 
