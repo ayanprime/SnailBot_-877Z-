@@ -54,6 +54,8 @@ void autonomous(void) {
 
 void usercontrol(void) {
 
+  Controller1.Screen.clearScreen();
+
   while (1) {
     if (SELECTING == false){
 
