@@ -6,10 +6,84 @@
 // 
 
 int level = 2;
+int transmode = 1;
 
 bool curveToggle = true;
 
 bool finger = false;
+
+void batterylvl() {
+
+    int x1 = Brain.Battery.capacity();
+    int x2 = x1;
+    Controller1.Screen.print("Battery: ");
+    Controller1.Screen.print(x1);
+    Controller1.Screen.print(" percent");
+
+    if (x2 != x1) {
+
+        Controller1.Screen.clearLine();
+        x2 = x1;
+
+    }
+
+}
+
+void leveldisp() {
+
+    int lvl = 0;
+
+    if (lvl != level) {
+
+        Controller1.Screen.clearLine();
+
+        if(level == 1) {
+
+            Controller1.Screen.print("Scoring: LOW");
+
+        } else if(level == 2) {
+
+            Controller1.Screen.print("Scoring: MID");
+
+        } else {
+
+            Controller1.Screen.print("Scoring: HI");
+
+        }
+
+        lvl = level;
+
+    }
+
+}
+
+void transdisp() {
+
+    int tms = 0;
+
+    if(tms != transmode) {
+
+        Controller1.Screen.clearLine();
+
+        if(transmode == 1) {
+
+            Controller1.Screen.print("Transmission: STRONG");
+        
+        } else if(transmode == 2) {
+
+            Controller1.Screen.print("Transmission: FAST");
+        
+        } else if((transmode != 1) && (transmode != 2)) {
+
+            Controller1.Screen.print("your Transmission BROKE!");
+        
+        }
+
+        tms = transmode;
+
+    }    
+
+}
 
 void curvature() {
 
@@ -59,28 +133,6 @@ void tank() {
 void descore() {
 
     finger = true;
-
-}
-
-void levelUP() {
-
-    if (level < 3) {
-    
-        level++;
-        wait(300, msec);
-    
-    }
-
-}
-
-void levelDOWN() {
-
-    if (level > 1) {
-    
-        level--;
-        wait(1, sec);
-    
-    }
 
 }
 
@@ -141,10 +193,6 @@ void Default() {
     }
 
     Controller1.ButtonL1.pressed(descore);
-
-    //Levels 
-    Controller1.ButtonDown.pressed(levelDOWN);
-    Controller1.ButtonUp.pressed(levelUP);
     
 }
 
@@ -153,9 +201,7 @@ void Alivia() {
     arcade();
     Left.spin(forward);
     Right.spin(forward);
-    //Levels 
-    Controller1.ButtonDown.pressed(levelDOWN);
-    Controller1.ButtonUp.pressed(levelUP);
+
     Controller1.ButtonR1.pressed(descore);
 
 }
@@ -165,9 +211,7 @@ void Andrew() {
     halo();
     Left.spin(forward);
     Right.spin(forward);
-    //Levels 
-    Controller1.ButtonDown.pressed(levelDOWN);
-    Controller1.ButtonUp.pressed(levelUP);
+
     Controller1.ButtonR1.pressed(descore);
 
 }
@@ -177,10 +221,20 @@ void Ayan() {
     curvature();
     Left.spin(forward);
     Right.spin(forward);
-    //Levels 
-    Controller1.ButtonDown.pressed(levelDOWN);
-    Controller1.ButtonUp.pressed(levelUP);
+
     Controller1.ButtonR1.pressed(descore);
+
+    Controller1.Screen.setCursor(1, 1);
+
+    batterylvl();
+
+    Controller1.Screen.setCursor(2, 1);
+
+    leveldisp();
+
+    Controller1.Screen.setCursor(3, 1);
+
+    transdisp();
 
 }
 
@@ -222,9 +276,7 @@ void Bennet() {
 
     }
 
-    //Levels 
-    Controller1.ButtonDown.pressed(levelDOWN);
-    Controller1.ButtonUp.pressed(levelUP);
+
     Controller1.ButtonY.pressed(descore);
 }
 
@@ -233,9 +285,7 @@ void Brian() {
     arcade();
     Left.spin(forward);
     Right.spin(forward);
-    //Levels 
-    Controller1.ButtonDown.pressed(levelDOWN);
-    Controller1.ButtonUp.pressed(levelUP);
+
     Controller1.ButtonR1.pressed(descore);
 }
 
@@ -271,10 +321,6 @@ void Connor() {
     }
 
     Controller1.ButtonA.pressed(descore);
-
-    //Levels 
-    Controller1.ButtonDown.pressed(levelDOWN);
-    Controller1.ButtonUp.pressed(levelUP);
     
 }
 
@@ -283,9 +329,7 @@ void Grace() {
     curvature();
     Left.spin(forward);
     Right.spin(forward);
-    //Levels 
-    Controller1.ButtonDown.pressed(levelDOWN);
-    Controller1.ButtonUp.pressed(levelUP);
+
     Controller1.ButtonR1.pressed(descore);
 }
 
@@ -298,9 +342,7 @@ void Maria() {
     tank();
     Left.spin(forward);
     Right.spin(forward);
-    //Levels 
-    Controller1.ButtonL2.pressed(levelDOWN);
-    Controller1.ButtonL1.pressed(levelUP);
+
     if(Controller1.ButtonR1.pressing()){
 
         Level();
