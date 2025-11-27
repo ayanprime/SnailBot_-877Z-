@@ -26,6 +26,9 @@ int autonDisp = 1;
 // this decides which auton is run
 int autonSelected = 1;
 
+// decides what is displayed
+int devscr = 1;
+
 int code1 = 0;
 int code2 = 0;
 int code3 = 0;
@@ -934,7 +937,6 @@ void ninePressed() {
 
 }
 
-
 void enterButton() {
 
     Brain.Screen.setFillColor("#e82323");
@@ -1298,7 +1300,7 @@ void mainScreen() {
     }
     if (Brain.Screen.pressing() && 190 <= Brain.Screen.xPosition() && Brain.Screen.xPosition() <= 290 && 200 <= Brain.Screen.yPosition() && Brain.Screen.yPosition() <= 230) {
 
-        //devButtonPressed();
+        devButtonPressed();
 
         wait(0.5, sec);
 
@@ -1703,6 +1705,42 @@ void autonDisplay() {
         Brain.Screen.print("Win Point");
     }
 
+
+}
+
+void devMode() {
+
+    if(drawBackground==true){
+        background();
+        drawBackground=false;
+        Brain.Screen.setPenColor(white);
+        Brain.Screen.setFont(mono30);
+        Brain.Screen.setCursor(1, 11);
+        Brain.Screen.print("DEVELOPER MODE");
+    }
+
+    if(devscr == 1) {
+
+        Brain.Screen.setFillColor(black);
+        Brain.Screen.setPenColor(white);
+        Brain.Screen.setFont(mono20);
+        Brain.Screen.setCursor(3, 17);
+        Brain.Screen.print("Motors Temperature");
+        Brain.Screen.setCursor(5, 5);
+        double x = rmf.temperature(fahrenheit);
+        Brain.Screen.print(x);
+
+    }
+
+    backButton();
+
+    if (Brain.Screen.pressing() && 434 <= Brain.Screen.xPosition() && Brain.Screen.xPosition() <= 474 && 60 <= Brain.Screen.yPosition() && Brain.Screen.yPosition() <= 190) {
+        
+        backButtonPressed();
+
+        wait(0.5, sec);
+
+    }
 
 }
 
@@ -2112,7 +2150,7 @@ void screenControl() {
     } else if (screenMode == 1) {
         autonomousMode();
     } else if (screenMode == 2) {
-        //devMode();
+        devMode();
     } else if (screenMode == 3) {
         driveSelector();
     } else if (screenMode == 4) {
