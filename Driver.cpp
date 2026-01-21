@@ -89,18 +89,18 @@ void curvature() {
 
     if (curveToggle) {
 
-        Left.setVelocity((((Controller1.Axis3.position() / 100.0 + fabs(Controller1.Axis3.position() / 100.0) * (Controller1.Axis1.position() / 100.0)) 
+        Left.setVelocity(((Controller1.Axis3.position() / 100.0 + fabs(Controller1.Axis3.position() / 100.0) * (Controller1.Axis1.position() / 100.0)) 
 / std::max(1.0, std::max(fabs(Controller1.Axis3.position() / 100.0 + fabs(Controller1.Axis3.position() / 100.0) * (Controller1.Axis1.position() / 100.0)), 
-fabs(Controller1.Axis3.position() / 100.0 - fabs(Controller1.Axis3.position() / 100.0) * (Controller1.Axis1.position() / 100.0))))) * 100.0) * 0.6, percent);
+fabs(Controller1.Axis3.position() / 100.0 - fabs(Controller1.Axis3.position() / 100.0) * (Controller1.Axis1.position() / 100.0))))) * 100.0, percent);
 
-        Right.setVelocity((((Controller1.Axis3.position() / 100.0 - fabs(Controller1.Axis3.position() / 100.0) * (Controller1.Axis1.position() / 100.0)) 
+        Right.setVelocity(((Controller1.Axis3.position() / 100.0 - fabs(Controller1.Axis3.position() / 100.0) * (Controller1.Axis1.position() / 100.0)) 
 / std::max(1.0, std::max(fabs(Controller1.Axis3.position() / 100.0 + fabs(Controller1.Axis3.position() / 100.0) * (Controller1.Axis1.position() / 100.0)), 
-fabs(Controller1.Axis3.position() / 100.0 - fabs(Controller1.Axis3.position() / 100.0) * (Controller1.Axis1.position() / 100.0))))) * 100.0) * 0.6, percent);
+fabs(Controller1.Axis3.position() / 100.0 - fabs(Controller1.Axis3.position() / 100.0) * (Controller1.Axis1.position() / 100.0))))) * 100.0, percent);
     
         if(Controller1.Axis3.position() == 0) {
 
-            Right.setVelocity(-Controller1.Axis1.position() * 0.6, percent);
-            Left.setVelocity(Controller1.Axis1.position() * 0.6, percent);
+            Right.setVelocity(-Controller1.Axis1.position(), percent);
+            Left.setVelocity(Controller1.Axis1.position(), percent);
 
         }
 
@@ -140,27 +140,29 @@ void Level() {
 
     if(level == 1) {
 
-        intake.spin(reverse);
-        converter.spin(reverse);
+        intake.spin(forward);
         conveyor.spin(reverse);
-        top.spin(reverse);
     
     } else if (level == 2) {
 
-        intake.spin(forward);
-        converter.spin(forward);
+        intake.spin(reverse);
         conveyor.spin(forward);
-        top.spin(reverse);
 
-
-    } else if (level == 3) {
-
-        intake.spin(forward);
-        converter.spin(forward);
-        conveyor.spin(forward);
-        top.spin(forward);
 
     }
+
+}
+
+void lvlup() {
+
+    level = 2;
+
+}
+
+void lvldown() {
+
+    level = 1;
+
 }
 
 void Default() {
@@ -169,30 +171,22 @@ void Default() {
     Left.spin(forward);
     Right.spin(forward);
     intake.setVelocity(100, percent);
+    conveyor.setVelocity(100, percent);
     fingerer.setVelocity(100, percent);
+
+    Controller1.ButtonUp.pressed(lvlup);
+    Controller1.ButtonDown.pressed(lvldown);
 
     if (Controller1.ButtonR1.pressing()) {
 
         Level();
-        fingerer.spin(forward);
 
     } else {
 
         intake.stop();
+        conveyor.stop();
 
     }
-
-    if (Controller1.ButtonR2.pressing()) {
-
-        fingerer.spin(forward);
-
-    } else {
-
-        fingerer.stop();
-
-    }
-
-    Controller1.ButtonL1.pressed(descore);
     
 }
 
@@ -247,8 +241,6 @@ void Bennet() {
     fingerer.setVelocity(100, percent);
     intake.setVelocity(100, percent);
     conveyor.setVelocity(70, percent);
-    converter.setVelocity(100, percent);
-    top.setVelocity(100, percent);
 
     if (Controller1.ButtonL2.pressing()) {
 
@@ -263,9 +255,7 @@ void Bennet() {
     } else {
 
         intake.stop();
-        converter.stop();
         conveyor.stop();
-        top.stop();
 
     }
 
@@ -297,8 +287,6 @@ void Connor() {
     fingerer.setVelocity(100, percent);
     intake.setVelocity(100, percent);
     conveyor.setVelocity(70, percent);
-    converter.setVelocity(100, percent);
-    top.setVelocity(100, percent);
 
     if (Controller1.ButtonR1.pressing()) {
 
@@ -307,9 +295,7 @@ void Connor() {
     } else {
 
         intake.stop();
-        converter.stop();
         conveyor.stop();
-        top.stop();
 
     }
 
@@ -336,7 +322,6 @@ void Grace() {
 void Maria() {
 
     intake.setVelocity(100, percent);
-    converter.setVelocity(100, percent);
     conveyor.setVelocity(100, percent);
 
     tank();
@@ -350,7 +335,6 @@ void Maria() {
     } else {
 
         intake.stop();
-        converter.stop();
         conveyor.stop();
 
     }
