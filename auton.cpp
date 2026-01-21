@@ -14,9 +14,9 @@ double prevRerror = 0;
 double prevLerror = 0;
 double pwrR;
 double pwrL;
-double kP = 18;
-double kI = 0.000004;
-double kD = 0.07;
+double kP = 10;
+double kI = 0;
+double kD = 0.01;
 
 bool move1 = true;
 bool move2 = true;
@@ -64,19 +64,17 @@ void resetPods() {
 void LRBauto() {
 
     intake.setVelocity(100, percent);
-    conveyor.setVelocity(70, percent);
-    converter.setVelocity(100, percent);
-    top.setVelocity(100, percent);
+    conveyor.setVelocity(100, percent);
 
     while(move1) {
 
-        Right.setVelocity(RPIDpwr(3.55), percent);
-        Left.setVelocity(LPIDpwr(3.55), percent);
+        Right.setVelocity(RPIDpwr(41.5), percent);
+        Left.setVelocity(LPIDpwr(41.5), percent);
 
         Right.spin(forward);
         Left.spin(forward);
 
-        if(Right.velocity(percent) == 0 && Left.velocity(percent) == 0 && PodRight.position(degrees) != 0 && PodLeft.position(degrees) != 0) {
+        if(Right.velocity(percent) == 0 && Left.velocity(percent) == 0 && PodRight.position(degrees) != 0) {
 
             wait(15, msec);
 
@@ -90,85 +88,18 @@ void LRBauto() {
     Right.setVelocity(70, percent);
     Left.setVelocity(70, percent);
 
-    Left.spinFor(1.5, turns, false);
-    Right.spinFor(-1.5, turns, true);
+    Left.spinFor(-0.425, turns, false);
+    Right.spinFor(0.425, turns, true);
+
+    Left.spinFor(0.4, turns, false);
+    Right.spinFor(0.4, turns, true);
+
+    intake.spin(reverse);
+
+    conveyor.spin(reverse);
+
 
     resetPods();
-
-    while(move2) {
-
-        intake.spin(reverse);
-
-        Right.setVelocity(RPIDpwr(27.15), percent);
-        Left.setVelocity(LPIDpwr(27.15), percent);
-
-        Right.spin(forward);
-        Left.spin(forward);
-
-        if(Right.velocity(percent) == 0 && Left.velocity(percent) == 0 && PodRight.position(degrees) != 0 && PodLeft.position(degrees) != 0) {
-
-            wait(15, msec);
-
-
-            move2 = false;
-
-        }
-
-    }
-
-    resetPods();
-
-    while(move3) {
-
-        Right.setVelocity(RPIDpwr(-7.2), percent);
-        Left.setVelocity(LPIDpwr(-7.2), percent);
-
-        Right.spin(forward);
-        Left.spin(forward);
-
-        if(Right.velocity(percent) == 0 && Left.velocity(percent) == 0 && PodRight.position(degrees) != 0 && PodLeft.position(degrees) != 0) {
-
-            wait(15, msec);
-
-
-            move3 = false;
-
-        }
-
-    }
-
-    Right.setVelocity(70, percent);
-    Left.setVelocity(70, percent);
-
-    Left.spinFor(0.75, turns, false);
-    Right.spinFor(-0.75, turns, true);
-
-    resetPods();
-
-    while(move4) {
-
-        Right.setVelocity(RPIDpwr(11.7), percent);
-        Left.setVelocity(LPIDpwr(11.7), percent);
-
-        Right.spin(forward);
-        Left.spin(forward);
-
-        if(Right.velocity(percent) == 0 && Left.velocity(percent) == 0 && PodRight.position(degrees) != 0 && PodLeft.position(degrees) != 0) {
-
-            wait(15, msec);
-
-
-            move4 = false;
-
-        }
-
-    }
-    
-    intake.spin(forward);
-    converter.spin(forward);
-    conveyor.spin(forward);
-    top.spin(reverse);
-    wait(5, sec);
     
 }
 
@@ -176,8 +107,6 @@ void RRBauto(){
 
     intake.setVelocity(100, percent);
     conveyor.setVelocity(70, percent);
-    converter.setVelocity(100, percent);
-    top.setVelocity(100, percent);
 
     while(move1) {
 
@@ -209,9 +138,7 @@ void RRBauto(){
     while(move2) {
 
         intake.spin(forward);
-        converter.spin(reverse);
         conveyor.spin(forward);
-        top.spin(forward);
 
         Right.setVelocity(RPIDpwr(27.15), percent);
         Left.setVelocity(LPIDpwr(27.15), percent);
@@ -235,9 +162,7 @@ void RRBauto(){
     while(move3) {
 
         intake.spin(forward);
-        converter.spin(reverse);
         conveyor.spin(forward);
-        top.spin(forward);
 
         Right.setVelocity(RPIDpwr(-4.4), percent);
         Left.setVelocity(LPIDpwr(-4.4), percent);
@@ -267,9 +192,7 @@ void RRBauto(){
     while(move4) {
 
         intake.spin(reverse);
-        converter.spin(reverse);
         conveyor.spin(reverse);
-        top.spin(reverse);
 
         Right.setVelocity(RPIDpwr(11), percent);
         Left.setVelocity(LPIDpwr(11), percent);
