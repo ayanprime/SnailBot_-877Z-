@@ -6,7 +6,10 @@
 // 
 
 int level = 1;
+
 bool convert = false;
+
+bool trq = false;
 
 bool curveToggle = true;
 
@@ -227,9 +230,52 @@ void Andrew() {
 
 void Ayan() {
 
-    curvature();
+    Right.setMaxTorque(100, percent);
+    Left.setMaxTorque(100, percent);
+    
+    if (curveToggle) {
+
+        curvature();
+
+    } else {
+
+        halo();
+
+    }
+
     Left.spin(forward);
     Right.spin(forward);
+
+    if (Controller1.ButtonDown.pressing()) {
+
+        level = 1;
+
+    } else if (Controller1.ButtonRight.pressing()) {
+
+        level = 2;
+
+    } else if (Controller1.ButtonUp.pressing()) {
+
+        level = 3;
+
+    } else if (Controller1.ButtonLeft.pressing()) {
+
+        level = 4;
+
+    } 
+    
+    if (Controller1.ButtonR1.pressing()) {
+
+        Level();
+
+    } else {
+
+        intake.stop();
+        conveyor.stop();
+        convertor.stop();
+        top.stop();
+
+    }
 
     Controller1.ButtonR1.pressed(descore);
 
@@ -285,6 +331,8 @@ void Bennet() {
 
 void Brian() {
 
+    Right.setMaxTorque(100, percent);
+    Left.setMaxTorque(100, percent);
     arcade();
     Left.spin(forward);
     Right.spin(forward);
@@ -333,6 +381,8 @@ void Brian() {
 
 void Connor() {
 
+    Right.setMaxTorque(100, percent);
+    Left.setMaxTorque(100, percent);
     halo();
     Left.spin(forward);
     Right.spin(forward);
