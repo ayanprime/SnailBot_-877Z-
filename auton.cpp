@@ -23,6 +23,26 @@ bool move2 = true;
 bool move3 = true;
 bool move4 = true;
 
+void FWD(double dis, double spd) {
+
+    double rot = dis / (PI * 3.25);
+    Right.setVelocity(spd, percent);
+    Left.setVelocity(spd, percent);
+    Right.spinFor(rot, turns, false);
+    Left.spinFor(rot, turns, true);
+
+}
+
+void TRN(double deg, double spd) {
+
+    double rot = (deg / 360) * (PI * 15.342) / (PI * 3.25);
+    Right.setVelocity(spd, percent);
+    Left.setVelocity(spd, percent);
+    Left.spinFor(-rot, turns, false);
+    Right.spinFor(rot, turns, true);
+
+}
+
 double RPIDpwr(double target) {
     Rerror = target - PodRight.position(turns) * wheelcirc;
     Rintegral += Rerror;
@@ -203,4 +223,19 @@ void RRBauto(){
 
     }
 
+}
+
+void RBBauto(){
+
+    FWD(5.5, 70);
+
+    wait(1, sec); 
+
+    FWD(-5.5, 60);
+    wait(1, sec); 
+    TRN(-90, 70); 
+    wait(1, sec); 
+    TRN(180, 70);
+    wait(1, sec); 
+    TRN(-90, 10);
 }
