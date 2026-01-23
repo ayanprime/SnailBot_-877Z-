@@ -12,8 +12,9 @@ extern motor lmb;
 extern motor_group Left;
 
 extern motor intake;
-
 extern motor conveyor;
+extern motor convertor;
+extern motor top;
 
 extern motor fingerer;
 
