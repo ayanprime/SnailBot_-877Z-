@@ -43,9 +43,14 @@ void autonomous(void) {
     LRBauto();
 
   }
-  if(autonSelected == 2) {
+  if(autonSelected == 3) {
 
       RRBauto();
+
+  }
+  if(autonSelected == 7) {
+
+      RBBauto();
 
   }
 }
