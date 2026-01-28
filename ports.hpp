@@ -16,6 +16,8 @@ extern motor conveyor;
 extern motor convertor;
 extern motor top;
 
+extern digital_out stickBenis;
+
 extern motor fingerer;
 
 extern rotation PodLeft;
