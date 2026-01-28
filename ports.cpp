@@ -18,6 +18,8 @@ motor conveyor = motor(PORT9, ratio18_1, true);
 motor convertor = motor(PORT2, ratio18_1, false);
 motor top = motor(PORT12, ratio18_1, false);
 
+digital_out stickBenis = digital_out(Brain.ThreeWirePort.A);
+
 motor fingerer = motor(PORT13, ratio18_1, false);
 
 //pods
