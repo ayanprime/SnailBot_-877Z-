@@ -123,7 +123,7 @@ void Level() {
         if (convert) {
 
             convertor.spin(reverse);
-            conveyor.setVelocity(70, percent);
+            conveyor.setVelocity(50, percent);
 
         }
 
@@ -137,7 +137,7 @@ void Level() {
         top.spin(reverse);
         if (convert) {
 
-            convertor.setVelocity(70, percent);
+            convertor.setVelocity(50, percent);
             convertor.spin(reverse);
 
         } else {
@@ -149,13 +149,13 @@ void Level() {
     } else if (level == 3) {
 
         intake.spin(forward);
-        conveyor.setVelocity(70, percent);
+        conveyor.setVelocity(50, percent);
         conveyor.spin(forward);
         top.spin(forward);
 
         if (convert) {
 
-            convertor.setVelocity(70, percent);
+            convertor.setVelocity(50, percent);
             convertor.spin(reverse);
 
         } else {
@@ -168,12 +168,12 @@ void Level() {
 
         intake.spin(forward);
         conveyor.spin(forward);
-        top.setVelocity(70, percent);
+        top.setVelocity(50, percent);
         top.spin(forward);
 
         if (convert) {
 
-            convertor.setVelocity(70, percent);
+            convertor.setVelocity(50, percent);
             convertor.spin(reverse);
 
         } else {
