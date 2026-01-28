@@ -10,3 +10,5 @@ void Brian();
 void Connor();
 void Grace();
 void Maria();
+void Level();
+extern int level;
