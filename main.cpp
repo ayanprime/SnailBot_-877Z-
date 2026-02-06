@@ -53,6 +53,11 @@ void autonomous(void) {
       RBBauto();
 
   }
+  if (autonSelected == 9) {
+
+      Skillsauto();
+
+  }
 }
 
 
