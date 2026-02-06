@@ -15,6 +15,8 @@ bool curveToggle = true;
 
 bool finger = false;
 
+bool benis = false;
+
 void batterylvl() {
 
     int x1 = Brain.Battery.capacity();
@@ -48,13 +50,47 @@ void leveldisp() {
 
             Controller1.Screen.print("Scoring: MID");
 
-        } else {
+        } else if (level == 3) {
 
             Controller1.Screen.print("Scoring: HI");
+
+        } else if (level == 4) {
+
+            Controller1.Screen.print("Scoring: Store");
 
         }
 
         lvl = level;
+
+    }
+
+}
+
+void ToggleCurve() {
+
+    if (curveToggle == true) {
+
+        curveToggle = false;
+
+    } else {
+
+        curveToggle = true;
+
+    }
+
+}
+
+void Benis() {
+
+    if (benis == false) {
+
+        stickBenis.set(true);
+        benis = true;
+
+    } else if (benis == true) {
+
+        stickBenis.set(false);
+        benis = false;
 
     }
 
@@ -119,11 +155,13 @@ void Level() {
     top.setVelocity(100, percent);
 
     if (level == 1) {
-   
+        
+        flipper.set(true);
+
         if (convert) {
 
             convertor.spin(reverse);
-            conveyor.setVelocity(50, percent);
+            conveyor.setVelocity(10, percent);
 
         }
 
@@ -132,6 +170,7 @@ void Level() {
     
     } else if (level == 2) {
 
+        flipper.set(true);
         intake.spin(forward);
         conveyor.spin(forward);
         top.spin(reverse);
@@ -148,8 +187,9 @@ void Level() {
 
     } else if (level == 3) {
 
+        flipper.set(false);
         intake.spin(forward);
-        conveyor.setVelocity(50, percent);
+        conveyor.setVelocity(25, percent);
         conveyor.spin(forward);
         top.spin(forward);
 
@@ -166,9 +206,10 @@ void Level() {
 
     } else if (level == 4) {
 
+        flipper.set(true);
         intake.spin(forward);
         conveyor.spin(forward);
-        top.setVelocity(50, percent);
+        top.setVelocity(0, percent);
         top.spin(forward);
 
         if (convert) {
@@ -277,7 +318,9 @@ void Ayan() {
 
     }
 
-    Controller1.ButtonR1.pressed(descore);
+    Controller1.ButtonX.pressed(Benis);
+
+    Controller1.ButtonB.pressed(ToggleCurve);
 
     Controller1.Screen.setCursor(1, 1);
 
@@ -430,6 +473,18 @@ void Connor() {
     }
 
     Controller1.ButtonA.pressed(descore);
+
+    Controller1.ButtonB.pressed(Benis);
+
+    Controller1.Screen.setCursor(1, 1);
+
+    leveldisp();
+
+    Controller1.Screen.setCursor(2, 1);
+
+    batterylvl();
+
+    Controller1.Screen.setCursor(3, 1);
     
 }
 
