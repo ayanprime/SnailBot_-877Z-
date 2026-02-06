@@ -23,6 +23,9 @@ int screenMode = 0;
 // auton selector ranging 1 - 8
 int autonDisp = 1;
 
+// dev mode screen ranging 1 - 2
+int devDisp = 1;
+
 // this decides which auton is run
 int autonSelected = 9;
 
@@ -430,6 +433,35 @@ void selectButtonPressed() {
     screenMode = 0;
 }
 
+void rightDevButton() {
+
+    Brain.Screen.setPenColor(white);
+    Brain.Screen.setFont(mono15);
+    
+    Brain.Screen.setFillColor("#5e5e5e");
+    Brain.Screen.drawRectangle(300, 208, 70, 20);
+
+    Brain.Screen.setCursor(15, 45);
+    Brain.Screen.print("------>");
+
+}
+
+void rightDevButtonPressed() {
+
+    Brain.Screen.setPenColor(white);
+    Brain.Screen.setFont(mono15);
+    
+    Brain.Screen.setFillColor("#494949");
+    Brain.Screen.drawRectangle(300, 208, 70, 20);
+
+    Brain.Screen.setCursor(15, 45);
+    Brain.Screen.print("------>");
+    if (devDisp < 2) {
+        devDisp = devDisp + 1;
+    }
+    drawBackground = true;
+}
+
 void rightButton() {
 
     Brain.Screen.setPenColor(white);
@@ -460,6 +492,35 @@ void rightButtonPressed() {
     autonDisp = autonDisp + 1;
     if (autonDisp > 8){
         autonDisp = 1;
+    }
+    drawBackground = true;
+}
+
+void leftDevButton() {
+
+    Brain.Screen.setPenColor(white);
+    Brain.Screen.setFont(mono15);
+    
+    Brain.Screen.setFillColor("#5e5e5e");
+    Brain.Screen.drawRectangle(20, 208, 70, 20);
+
+    Brain.Screen.setCursor(15, 5);
+    Brain.Screen.print("<------");
+
+}
+
+void leftDevButtonPressed() {
+
+    Brain.Screen.setPenColor(white);
+    Brain.Screen.setFont(mono15);
+    
+    Brain.Screen.setFillColor("#494949");
+    Brain.Screen.drawRectangle(20, 208, 70, 20);
+
+    Brain.Screen.setCursor(15, 5);
+    Brain.Screen.print("<------");
+    if (devDisp > 1) {
+        devDisp = devDisp - 1;
     }
     drawBackground = true;
 }
@@ -1298,7 +1359,7 @@ void mainScreen() {
     }
     if (Brain.Screen.pressing() && 190 <= Brain.Screen.xPosition() && Brain.Screen.xPosition() <= 290 && 200 <= Brain.Screen.yPosition() && Brain.Screen.yPosition() <= 230) {
 
-        //devButtonPressed();
+        devButtonPressed();
 
         wait(0.5, sec);
 
@@ -1475,7 +1536,7 @@ void autonomousMode() {
 
     if (drawBackground == true && autonDisp == 3){
         Brain.Screen.clearScreen();
-        RRB();
+        //RRB();
         drawBackground=false;
         
         Brain.Screen.setPenColor(white);
@@ -1635,7 +1696,7 @@ void autonDisplay() {
     }
 
     if(autonSelected == 3){
-        RRB();
+        //RRB();
         
         Brain.Screen.setPenColor(white);
         Brain.Screen.setFont(mono30);
@@ -1716,17 +1777,252 @@ void autonDisplay() {
 }
 
 void devMode() {
-    
-    if(drawBackground==true){
+
+    if (drawBackground == true && devDisp == 1){
+        Brain.Screen.clearScreen();
         background();
         drawBackground=false;
+
+        Brain.Screen.setFillColor(transparent);
+        Brain.Screen.setPenColor(white);
+        Brain.Screen.setFont(mono30);
+        Brain.Screen.setCursor(1, 8);
+        Brain.Screen.print("Dev Mode: Drivetrain");
+        Brain.Screen.setFont(mono15);
+        Brain.Screen.setCursor(15, 16);
+        Brain.Screen.print("Bot Battery: ");
+        Brain.Screen.print(Brain.Battery.capacity());
+        Brain.Screen.print(" percent");
+
+        if (rmf.temperature(fahrenheit) >= 149) {
+            Brain.Screen.setFillColor(transparent);
+            Brain.Screen.setPenColor(red);
+        } else if (rmf.temperature(fahrenheit) >= 140) {
+            Brain.Screen.setFillColor(transparent);
+            Brain.Screen.setPenColor(orange);
+        } else if (rmf.temperature(fahrenheit) >= 131) {
+            Brain.Screen.setFillColor(transparent);
+            Brain.Screen.setPenColor(yellow);
+        } else {
+            Brain.Screen.setFillColor(transparent);
+            Brain.Screen.setPenColor(green);
+        }
+        Brain.Screen.setFont(mono20);
+        Brain.Screen.setCursor(4, 2);
+        Brain.Screen.print("Right Motor Front");
+        Brain.Screen.setCursor(5, 2);
+        Brain.Screen.setPenColor(white);
+        Brain.Screen.print("Temp: ");
+        Brain.Screen.print(rmf.temperature(fahrenheit));
+        Brain.Screen.print(" F");
+        Brain.Screen.setCursor(6, 2);
+        Brain.Screen.print("Power: ");
+        Brain.Screen.print(rmf.power(vex::powerUnits::watt));
+        Brain.Screen.print(" W");
+
+        if (rmb.temperature(fahrenheit) >= 149) {
+            Brain.Screen.setFillColor(transparent);
+            Brain.Screen.setPenColor(red);
+        } else if (rmb.temperature(fahrenheit) >= 140) {
+            Brain.Screen.setFillColor(transparent);
+            Brain.Screen.setPenColor(orange);
+        } else if (rmb.temperature(fahrenheit) >= 131) {
+            Brain.Screen.setFillColor(transparent);
+            Brain.Screen.setPenColor(yellow);
+        } else {
+            Brain.Screen.setFillColor(transparent);
+            Brain.Screen.setPenColor(green);
+        }
+        Brain.Screen.setFont(mono20);
+        Brain.Screen.setCursor(8, 2);
+        Brain.Screen.print("Right Motor Back");
+        Brain.Screen.setCursor(9, 2);
+        Brain.Screen.setPenColor(white);
+        Brain.Screen.print("Temp: ");
+        Brain.Screen.print(rmb.temperature(fahrenheit));
+        Brain.Screen.print(" F");
+        Brain.Screen.setCursor(10, 2);
+        Brain.Screen.print("Power: ");
+        Brain.Screen.print(rmb.power(vex::powerUnits::watt));
+        Brain.Screen.print(" W");
+
+        if (lmf.temperature(fahrenheit) >= 149) {
+            Brain.Screen.setFillColor(transparent);
+            Brain.Screen.setPenColor(red);
+        } else if (lmf.temperature(fahrenheit) >= 140) {
+            Brain.Screen.setFillColor(transparent);
+            Brain.Screen.setPenColor(orange);
+        } else if (lmf.temperature(fahrenheit) >= 131) {
+            Brain.Screen.setFillColor(transparent);
+            Brain.Screen.setPenColor(yellow);
+        } else {
+            Brain.Screen.setFillColor(transparent);
+            Brain.Screen.setPenColor(green);
+        }
+        Brain.Screen.setFont(mono20);
+        Brain.Screen.setCursor(4, 24);
+        Brain.Screen.print("Left Motor Front");
+        Brain.Screen.setCursor(5, 24);
+        Brain.Screen.setPenColor(white);
+        Brain.Screen.print("Temp: ");
+        Brain.Screen.print(lmf.temperature(fahrenheit));
+        Brain.Screen.print(" F");
+        Brain.Screen.setCursor(6, 24);
+        Brain.Screen.print("Power: ");
+        Brain.Screen.print(lmf.power(vex::powerUnits::watt));
+        Brain.Screen.print(" W");
+
+        if (lmb.temperature(fahrenheit) >= 149) {
+            Brain.Screen.setFillColor(transparent);
+            Brain.Screen.setPenColor(red);
+        } else if (lmb.temperature(fahrenheit) >= 140) {
+            Brain.Screen.setFillColor(transparent);
+            Brain.Screen.setPenColor(orange);
+        } else if (lmb.temperature(fahrenheit) >= 131) {
+            Brain.Screen.setFillColor(transparent);
+            Brain.Screen.setPenColor(yellow);
+        } else {
+            Brain.Screen.setFillColor(transparent);
+            Brain.Screen.setPenColor(green);
+        }
+        Brain.Screen.setFont(mono20);
+        Brain.Screen.setCursor(8, 24);
+        Brain.Screen.print("Left Motor Back");
+        Brain.Screen.setCursor(9, 24);
+        Brain.Screen.setPenColor(white);
+        Brain.Screen.print("Temp: ");
+        Brain.Screen.print(lmb.temperature(fahrenheit));
+        Brain.Screen.print(" F");
+        Brain.Screen.setCursor(10, 24);
+        Brain.Screen.print("Power: ");
+        Brain.Screen.print(lmb.power(vex::powerUnits::watt));
+        Brain.Screen.print(" W");
+
     }
 
-    Brain.Screen.setFillColor(transparent);
-    Brain.Screen.setPenColor(white);
-    Brain.Screen.setFont(mono30);
-    Brain.Screen.setCursor(2, 4);
-    Brain.Screen.print("Dev Mode");
+    if (drawBackground == true && devDisp == 2){
+        Brain.Screen.clearScreen();
+        background();
+        drawBackground=false;
+
+        Brain.Screen.setFillColor(transparent);
+        Brain.Screen.setPenColor(white);
+        Brain.Screen.setFont(mono30);
+        Brain.Screen.setCursor(1, 8);
+        Brain.Screen.print("Dev Mode: Scorer");
+        Brain.Screen.setFont(mono15);
+        Brain.Screen.setCursor(15, 16);
+        Brain.Screen.print("Bot Battery: ");
+        Brain.Screen.print(Brain.Battery.capacity());
+        Brain.Screen.print(" percent");
+
+        if (intake.temperature(fahrenheit) >= 149) {
+            Brain.Screen.setFillColor(transparent);
+            Brain.Screen.setPenColor(red);
+        } else if (intake.temperature(fahrenheit) >= 140) {
+            Brain.Screen.setFillColor(transparent);
+            Brain.Screen.setPenColor(orange);
+        } else if (intake.temperature(fahrenheit) >= 131) {
+            Brain.Screen.setFillColor(transparent);
+            Brain.Screen.setPenColor(yellow);
+        } else {
+            Brain.Screen.setFillColor(transparent);
+            Brain.Screen.setPenColor(green);
+        }
+        Brain.Screen.setFont(mono20);
+        Brain.Screen.setCursor(4, 2);
+        Brain.Screen.print("Intake Motor");
+        Brain.Screen.setCursor(5, 2);
+        Brain.Screen.setPenColor(white);
+        Brain.Screen.print("Temp: ");
+        Brain.Screen.print(intake.temperature(fahrenheit));
+        Brain.Screen.print(" F");
+        Brain.Screen.setCursor(6, 2);
+        Brain.Screen.print("Power: ");
+        Brain.Screen.print(intake.power(vex::powerUnits::watt));
+        Brain.Screen.print(" W");
+
+        if (convertor.temperature(fahrenheit) >= 149) {
+            Brain.Screen.setFillColor(transparent);
+            Brain.Screen.setPenColor(red);
+        } else if (convertor.temperature(fahrenheit) >= 140) {
+            Brain.Screen.setFillColor(transparent);
+            Brain.Screen.setPenColor(orange);
+        } else if (convertor.temperature(fahrenheit) >= 131) {
+            Brain.Screen.setFillColor(transparent);
+            Brain.Screen.setPenColor(yellow);
+        } else {
+            Brain.Screen.setFillColor(transparent);
+            Brain.Screen.setPenColor(green);
+        }
+        Brain.Screen.setFont(mono20);
+        Brain.Screen.setCursor(8, 2);
+        Brain.Screen.print("Convertor Motor");
+        Brain.Screen.setCursor(9, 2);
+        Brain.Screen.setPenColor(white);
+        Brain.Screen.print("Temp: ");
+        Brain.Screen.print(convertor.temperature(fahrenheit));
+        Brain.Screen.print(" F");
+        Brain.Screen.setCursor(10, 2);
+        Brain.Screen.print("Power: ");
+        Brain.Screen.print(convertor.power(vex::powerUnits::watt));
+        Brain.Screen.print(" W");
+
+        if (conveyor.temperature(fahrenheit) >= 149) {
+            Brain.Screen.setFillColor(transparent);
+            Brain.Screen.setPenColor(red);
+        } else if (conveyor.temperature(fahrenheit) >= 140) {
+            Brain.Screen.setFillColor(transparent);
+            Brain.Screen.setPenColor(orange);
+        } else if (conveyor.temperature(fahrenheit) >= 131) {
+            Brain.Screen.setFillColor(transparent);
+            Brain.Screen.setPenColor(yellow);
+        } else {
+            Brain.Screen.setFillColor(transparent);
+            Brain.Screen.setPenColor(green);
+        }
+        Brain.Screen.setFont(mono20);
+        Brain.Screen.setCursor(4, 24);
+        Brain.Screen.print("Conveyor Motor");
+        Brain.Screen.setCursor(5, 24);
+        Brain.Screen.setPenColor(white);
+        Brain.Screen.print("Temp: ");
+        Brain.Screen.print(conveyor.temperature(fahrenheit));
+        Brain.Screen.print(" F");
+        Brain.Screen.setCursor(6, 24);
+        Brain.Screen.print("Power: ");
+        Brain.Screen.print(conveyor.power(vex::powerUnits::watt));
+        Brain.Screen.print(" W");
+
+    }
+
+    backButton();
+    rightDevButton();
+    leftDevButton();
+
+    if (Brain.Screen.pressing() && 434 <= Brain.Screen.xPosition() && Brain.Screen.xPosition() <= 474 && 60 <= Brain.Screen.yPosition() && Brain.Screen.yPosition() <= 190) {
+        
+        backButtonPressed();
+
+        wait(0.5, sec);
+
+    }
+
+    if (Brain.Screen.pressing() && 20 <= Brain.Screen.xPosition() && Brain.Screen.xPosition() <= 90 && 208 <= Brain.Screen.yPosition() && Brain.Screen.yPosition() <= 228) {
+        
+        leftDevButtonPressed();
+
+        wait(0.5, sec);
+
+    }
+
+    if (Brain.Screen.pressing() && 300 <= Brain.Screen.xPosition() && Brain.Screen.xPosition() <= 370 && 208 <= Brain.Screen.yPosition() && Brain.Screen.yPosition() <= 228) {
+        
+        rightDevButtonPressed();
+
+        wait(0.5, sec);
+
+    }
 
 }
 
@@ -2136,7 +2432,7 @@ void screenControl() {
     } else if (screenMode == 1) {
         autonomousMode();
     } else if (screenMode == 2) {
-        //devMode();
+        devMode();
     } else if (screenMode == 3) {
         driveSelector();
     } else if (screenMode == 4) {
