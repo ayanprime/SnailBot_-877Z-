@@ -17,6 +17,7 @@ extern motor convertor;
 extern motor top;
 
 extern digital_out stickBenis;
+extern digital_out flipper;
 
 extern motor fingerer;
 
