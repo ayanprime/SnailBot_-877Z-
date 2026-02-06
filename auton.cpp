@@ -82,6 +82,7 @@ void resetPods() {
 
 }
 
+
 void LRBauto() {
 // move 1
     FWD(22.549, 30);
@@ -187,60 +188,36 @@ void LRWPauto(){
 
 void RRBauto(){
 // move 1
-    FWD(22.549, 30);
-    wait(0.5, sec);
-    TRN(90, 30);
-    wait(0.5, sec);
-    //move 2
-    FWD(7.342, 30);
-    wait(0.5, sec);
-    TRN(-90, 30);
-    wait(0.5, sec);
-    // move 3
-    FWD(16.75, 30);
-    wait(0.5, sec);
-    TRN(-90, 30);
-    wait(0.5, sec);
-    // move 4: intake blocks
-    level = 4;
-    Level();
-    FWD(29, 30);
-    top.stop();
-    conveyor.stop();
-    intake.stop();
-    convertor.stop();
-    wait(0.5, sec);
-    TRN(-90, 30);
-    wait(0.5, sec);
-    // move 5
-    FWD(24, 30);
-    wait(0.5, sec);
-    TRN(90, 30);
-    wait(0.5, sec);
-    //move 6
-    FWD(17.25, 30);
-    wait(0.5, sec);
-    TRN(-90, 30);
-    wait(0.5, sec);
-    // move 7: go to match loader
+  FWD(11, 50); 
+    wait(0.5, sec); 
+    TRN(-90, 50); 
+    wait(0.5, sec); 
+    FWD(22.5, 50);
+    wait(0.5, sec); 
+    TRN(-90, 50); 
+    wait(0.5, sec); 
     stickBenis.set(true);
-    Level();
-    FWD(10, 30);
-    wait(15, sec);
+    wait(0.5, sec); 
+    level = 4; 
+    Level(); 
+    FWD(9, 40); 
+    wait(3, sec);
+    FWD(-1, 90);
+    FWD(2, 90);
+    wait(1, sec); 
+    FWD(-5, 50);
+    stickBenis.set(false);
     top.stop();
     conveyor.stop();
     intake.stop();
     convertor.stop();
-    stickBenis.set(false);
-    FWD(-10, 30);
-    wait(0.5, sec);
-    TRN(180, 30); 
-    wait(0.5, sec);
-    // move 8: go to score
-    FWD(10, 30);
-    wait(0.5, sec);
     level = 3;
-    Level();
+    TRN(180, 50); 
+    wait(1, sec); 
+    FWD(12, 50);
+    wait(.5, sec);
+    Level(); 
+    
 
 
 
@@ -322,62 +299,37 @@ void LBWPauto(){
 
 void RBBauto(){
 
-    // move 1
-    FWD(22.549, 30);
-    wait(0.5, sec);
-    TRN(90, 30);
-    wait(0.5, sec);
-    //move 2
-    FWD(7.342, 30);
-    wait(0.5, sec);
-    TRN(-90, 30);
-    wait(0.5, sec);
-    // move 3
-    FWD(16.75, 30);
-    wait(0.5, sec);
-    TRN(-90, 30);
-    wait(0.5, sec);
-    // move 4: intake blocks
-    level = 4;
-    Level();
-    FWD(29, 30);
-    top.stop();
-    conveyor.stop();
-    intake.stop();
-    convertor.stop();
-    wait(0.5, sec);
-    TRN(-90, 30);
-    wait(0.5, sec);
-    // move 5
-    FWD(24, 30);
-    wait(0.5, sec);
-    TRN(90, 30);
-    wait(0.5, sec);
-    //move 6
-    FWD(17.25, 30);
-    wait(0.5, sec);
-    TRN(-90, 30);
-    wait(0.5, sec);
-    // move 7: go to match loader
+   FWD(11, 50); 
+    wait(0.5, sec); 
+    TRN(-90, 50); 
+    wait(0.5, sec); 
+    FWD(22.5, 50);
+    wait(0.5, sec); 
+    TRN(-90, 50); 
+    wait(0.5, sec); 
     stickBenis.set(true);
-    Level();
-    FWD(10, 30);
-    wait(15, sec);
+    wait(0.5, sec); 
+    level = 4; 
+    Level(); 
+    FWD(9, 40); 
+    wait(2, sec);
+    FWD(-1, 90);
+    FWD(2, 90);
+    wait(.5, sec); 
+    FWD(-5, 50);
+    stickBenis.set(false);
     top.stop();
     conveyor.stop();
     intake.stop();
     convertor.stop();
-    stickBenis.set(false);
-    FWD(-10, 30);
-    wait(0.5, sec);
-    TRN(180, 30); 
-    wait(0.5, sec);
-    // move 8: go to score
-    FWD(10, 30);
-    wait(0.5, sec);
     level = 3;
-    Level();
-
+    TRN(180, 50); 
+    wait(.5, sec); 
+    FWD(12, 70);
+    wait(.5, sec);
+    Level(); 
+    
+    
 }
 
 void RBWPauto(){
@@ -385,6 +337,7 @@ void RBWPauto(){
     
 
 }
+
 
 void Skillsauto(){
     
